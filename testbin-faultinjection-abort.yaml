@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: testbin
+spec:
+  hosts:
+  - testbin
+  http:
+  - match:
+    - headers:
+        cookie:
+          regex: "^(.*?;)?(user=jason)(;.*)?$"
+    fault:
+      abort:
+        percent: 100
+        httpStatus: 500
+    route:
+    - destination:
+        host: testbin
+        subset: v1
+  - route:
+    - destination:
+        host: testbin
+        subset: v1

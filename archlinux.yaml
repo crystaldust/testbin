@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: archlinux
+  # namespace: servicecomb
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: archlinux
+        version: fish
+    spec:
+      containers:
+      - name: archlinux
+        image: base/archlinux:fish
+        imagePullPolicy: IfNotPresent
+        args: ["sleep", "5555555555555555555555555"]
+---
